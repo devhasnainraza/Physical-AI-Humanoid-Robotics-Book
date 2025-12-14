@@ -1,0 +1,34 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mainGrad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#25C2A0" />
+      <stop offset="50%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Glow (Subtle) -->
+  <circle cx="256" cy="256" r="200" fill="url(#mainGrad)" fill-opacity="0.1" filter="url(#glow)" />
+
+  <!-- The Neural Spark Shape -->
+  <path d="M256 100 
+           C 350 100, 412 180, 412 256
+           C 412 350, 350 412, 256 412
+           C 162 412, 100 350, 100 256
+           C 100 180, 162 100, 256 100
+           Z" 
+        stroke="url(#mainGrad)" stroke-width="32" stroke-linecap="round" fill="none" />
+        
+  <!-- Intersecting Wave -->
+  <path d="M150 256 C 150 150, 362 150, 362 256 S 150 362, 150 256 Z" 
+        stroke="white" stroke-width="12" stroke-opacity="0.8" fill="none" />
+
+  <!-- Center Core -->
+  <circle cx="256" cy="256" r="40" fill="white" />
+  <circle cx="256" cy="256" r="25" fill="url(#mainGrad)" />
+
+</svg>
