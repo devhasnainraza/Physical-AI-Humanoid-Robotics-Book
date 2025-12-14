@@ -30,6 +30,17 @@ graph TD
     end
 ```
 
+### 1.2 Executors and Threading
+
+In standard Python, code runs line-by-line. In robotics, 50 things happen at once.
+ROS 2 uses **Executors** to manage callbacks.
+
+-   **SingleThreadedExecutor** (Default): Safest. Processes one callback at a time.
+-   **MultiThreadedExecutor**: Dangerous but fast. Runs multiple callbacks in parallel threads.
+
+**Warning: Deadlocks**
+If `Callback A` waits for `Callback B`, but `Callback B` is stuck waiting for the same Executor thread as `A`, your robot freezes. This is a **Deadlock**.
+
 ---
 
 ## 2. Nodes: The Atoms of Computation
@@ -83,6 +94,13 @@ Max: 26.5 MB/s
 ```
 
 If you see >500 MB/s, you might need to use **Zero Copy** transport (shared memory) to prevent CPU overload on the Jetson Orin.
+
+### 3.2 QoS Profiles: History and Reliability
+
+-   **History: KEEP_LAST (Depth: 10)**: "Only remember the last 10 messages. If the consumer is slow, drop old ones." (Good for sensors).
+-   **History: KEEP_ALL**: "Never drop a message." (Good for logs).
+-   **Reliability: BEST_EFFORT**: "Fire and forget." (UDP-like).
+-   **Reliability: RELIABLE**: "Retry until ack." (TCP-like).
 
 ---
 

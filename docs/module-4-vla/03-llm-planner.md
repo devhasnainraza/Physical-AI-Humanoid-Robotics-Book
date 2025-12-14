@@ -29,33 +29,29 @@ Context: User is sitting on the couch. There is a kitchen nearby.
 Output: A JSON list of actions.
 ```
 
-### 1.2 Chain of Thought (CoT)
+---
 
-We force the LLM to "think" before acting to improve reliability.
+## 2. ReAct: Reason + Act
+
+Simple prompting is often brittle. **ReAct** is a prompting strategy where the LLM intersperses thoughts with actions.
 
 **User**: "Get me my water bottle."
-**Robot (Internal Monologue)**:
-1.  *User wants water bottle.*
-2.  *I don't see a water bottle right now.*
-3.  *Water bottles are usually in the kitchen.*
-4.  *I should go to the kitchen first.*
-5.  *Then I will look for it.*
 
-**Output JSON**:
-```json
-[
-  {"action": "speak", "args": ["Sure, let me check the kitchen."]},
-  {"action": "navigate_to", "args": ["kitchen"]},
-  {"action": "find_object", "args": ["water bottle"]},
-  {"action": "pick_up", "args": ["$LAST_RESULT"]},
-  {"action": "navigate_to", "args": ["couch"]},
-  {"action": "place", "args": ["table"]}
-]
-```
+**LLM Trace (ReAct)**:
+1.  **Thought**: User wants water. I need to find it first.
+2.  **Action**: `navigate_to("kitchen")`
+3.  **Observation**: (Robot arrives at kitchen).
+4.  **Thought**: I am in the kitchen. I need to see if the bottle is here.
+5.  **Action**: `find_object("water bottle")`
+6.  **Observation**: Found at (1.2, 0.5, 0.8).
+7.  **Thought**: I see it. I can pick it up.
+8.  **Action**: `pick_up(1.2, 0.5, 0.8)`
+
+This allows the robot to handle failures (e.g., if Observation was "Object not found", the Thought would change to "Maybe it's in the bedroom").
 
 ---
 
-## 2. Implementing the Planner in Python
+## 3. Implementing the Planner in Python
 
 We use **LangChain** to manage this structured output.
 
@@ -91,7 +87,9 @@ plan = plan_task(cmd)
 # Executor loop would iterate through 'plan' and call ROS 2 services
 ```
 
-## 3. The Capstone: Putting it All Together
+---
+
+## 4. The Capstone: Putting it All Together
 
 In the final project, you will combine:
 1.  **Whisper** (Hearing "Bring me a soda")

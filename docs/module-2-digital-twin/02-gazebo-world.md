@@ -66,10 +66,18 @@ We will create a world with:
               <size>100 100</size>
             </plane>
           </geometry>
+          <!-- PBR Material -->
           <material>
             <ambient>0.8 0.8 0.8 1</ambient>
             <diffuse>0.8 0.8 0.8 1</diffuse>
             <specular>0.8 0.8 0.8 1</specular>
+            <pbr>
+                <metal>
+                  <albedo_map>materials/textures/concrete_albedo.png</albedo_map>
+                  <normal_map>materials/textures/concrete_normal.png</normal_map>
+                  <roughness_map>materials/textures/concrete_roughness.png</roughness_map>
+                </metal>
+            </pbr>
           </material>
         </visual>
       </link>
@@ -79,13 +87,10 @@ We will create a world with:
 </sdf>
 ```
 
-### 2.1 Why Friction Matters
+### 2.1 PBR Materials (Physically Based Rendering)
 
-Notice the `<mu>1.0</mu>` tag.
--   **Low Friction (0.1)**: Like ice. Your humanoid will slip and fall.
--   **High Friction (1.0)**: Like rubber on concrete. Good grip.
-
-For **Sim-to-Real** transfer, we often use **Domain Randomization**: we train the AI on grounds with friction varying from 0.5 to 1.5, so it learns to adapt to slippery floors and sticky carpets alike.
+For VSLAM to work, walls cannot be plain white. They need **Texture**.
+Gazebo supports PBR, which uses multiple maps (Albedo, Normal, Roughness) to simulate how light bounces off surfaces. This creates realistic reflections and shadows that are critical for training vision models.
 
 ---
 

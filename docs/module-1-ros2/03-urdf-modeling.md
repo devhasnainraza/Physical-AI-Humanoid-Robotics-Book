@@ -13,13 +13,29 @@ title: Modeling Robots with URDF
 -   **Visuals**: What it looks like (meshes).
 -   **Collisions**: Simple shapes used for physics calculations.
 
+## 2. The Physics of Inertia
+
+To simulate a robot accurately, Gazebo needs to know how hard it is to rotate a limb. This is the **Moment of Inertia (Tensor)**.
+
+### 2.1 Calculating Inertia for a Box
+
+For a solid cuboid (width w, depth d, height h) of mass m:
+
+```
+Ixx = 1/12 * m * (h^2 + d^2)
+Iyy = 1/12 * m * (w^2 + h^2)
+Izz = 1/12 * m * (w^2 + d^2)
+```
+
+If you put `ixx="1.0"` for a 100g finger, the simulation will explode because the physics engine sees a "black hole density" object.
+
 ---
 
-## 2. Anatomy of a Leg
+## 3. Anatomy of a Leg
 
 Let's model a simple 2-DOF (Degree of Freedom) leg. It has a **Hip** joint and a **Knee** joint.
 
-### 2.1 The XML Structure
+### 3.1 The XML Structure
 
 Create a file named `simple_leg.urdf`:
 
@@ -60,6 +76,11 @@ Create a file named `simple_leg.urdf`:
       </geometry>
       <origin xyz="0 0 -0.2" rpy="0 0 0"/>
     </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <!-- Ixx = 1/12 * 1 * (0.4^2 + 0.05^2) = 0.0135 -->
+      <inertia ixx="0.0135" ixy="0.0" ixz="0.0" iyy="0.0135" iyz="0.0" izz="0.001"/>
+    </inertial>
   </link>
 
   <!-- HIP JOINT (Connecting Base to Thigh) -->
@@ -96,7 +117,7 @@ Create a file named `simple_leg.urdf`:
 
 ---
 
-## 3. Visualizing with `urdf_tutorial`
+## 4. Visualizing with `urdf_tutorial`
 
 To see your robot, you don't need a physical machine. ROS 2 provides tools to render the XML.
 
@@ -114,7 +135,7 @@ A window (RViz) will open showing your leg. A GUI slider window (Joint State Pub
 
 ---
 
-## 4. Xacro: Macros for Humanoids
+## 5. Xacro: Macros for Humanoids
 
 Writing XML for a robot with 2 arms and 2 legs (like the Unitree G1) involves copy-pasting code 4 times. This is bad practice.
 

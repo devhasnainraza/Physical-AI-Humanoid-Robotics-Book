@@ -80,21 +80,36 @@ Gazebo produces messages in its own format (Ignition Transport). ROS 2 expects D
 ros2 run ros_gz_bridge parameter_bridge /scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan
 ```
 
-This tells the bridge:
-"Take the `/scan` topic from Gazebo (type `gz.msgs.LaserScan`), convert it to ROS 2 type `sensor_msgs/msg/LaserScan`, and publish it to ROS 2."
-
 ---
 
-## 3. Sensor Noise: Making it Real
+## 3. Sensor Noise: The Mathematics
 
-Perfect sensors make for lazy AI. Real sensors are noisy. Gazebo allows you to add Gaussian noise to the simulation.
+Perfect sensors make for lazy AI. Real sensors are noisy.
+We model noise using a **Gaussian Distribution**.
 
+For a true distance D_true, the sensor reports D_measured:
+
+```
+D_measured = D_true + epsilon
+epsilon ~ Gaussian(mean, variance)
+```
+
+Where:
+-   mean = 0.0 (Unbiased error)
+-   $\sigma$ (Standard Deviation) = 0.01 (1cm error)
+
+In SDF:
 ```xml
 <noise>
   <type>gaussian</type>
   <mean>0.0</mean>
-  <stddev>0.01</stddev> <!-- 1cm error standard deviation -->
+  <stddev>0.01</stddev> 
 </noise>
 ```
 
-Training your AI with this noise ensures it doesn't freak out when the real world isn't perfectly sharp.
+### 3.1 Bias vs Noise
+-   **Noise**: Random jitter (can be filtered by averaging).
+-   **Bias**: Constant offset (e.g., sensor always reads +5cm).
+-   **Drift**: Bias that changes over time (IMU drift).
+
+Simulating **Drift** is crucial for testing VSLAM loop closure capabilities.

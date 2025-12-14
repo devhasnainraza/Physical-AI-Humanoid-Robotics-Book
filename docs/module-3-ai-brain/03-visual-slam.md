@@ -24,17 +24,24 @@ Before a robot can navigate, it must answer two questions:
 | **Failure Mode** | Long corridors (geometric similarity) | Low light, motion blur, featureless white walls |
 | **Cost** | High (LiDARs are expensive) | Low (Cameras are cheap) |
 
-For humanoids, we prefer **Visual SLAM** because cameras are lightweight and we need them for object recognition anyway.
-
 ---
 
-## 3. How VSLAM Works (Simplified)
+## 3. Epipolar Geometry: The Math of Stereo Vision
 
-1.  **Feature Extraction**: The algorithm looks for "interesting points" (corners, high contrast spots) in the image.
-2.  **Feature Matching**: It finds the same points in the *next* frame.
-3.  **Motion Estimation**: based on how the points moved, it calculates how the camera must have moved.
-    -   *Example*: If all points moved Left, the Camera moved Right.
-4.  **Loop Closure**: The "Aha!" moment. "I recognize this room! I was here 5 minutes ago!" The algorithm snaps the current map to align with the old map, fixing drift errors.
+How do we get 3D depth ($Z$) from two 2D images?
+
+Given two cameras with focal length $f$, separated by a baseline $b$, looking at a point $P$.
+The disparity d is the difference in the x-coordinate of the point in the Left (xL) and Right (xR) images.
+
+`d = xL - xR`
+
+The depth Z is calculated as:
+
+`Z = (f * b) / d`
+
+**Implication**:
+-   If d is small (point is far away), depth estimation is noisy.
+-   If $b$ (baseline) is wider, depth accuracy improves at range, but close-up performance suffers.
 
 ---
 
@@ -77,4 +84,12 @@ def generate_launch_description():
     ])
 ```
 
-**Key Requirement**: VSLAM needs a **Stereo Camera** (Left + Right) or a **Depth Camera** to understand scale. With a single Mono camera, you can map the world, but you won't know if a hallway is 1 meter long or 100 meters long (scale ambiguity).
+### 4.2 Loop Closure
+
+When the robot revisits a known location, accumulated drift error (Dead Reckoning) is corrected.
+Mathematically, this is a **Pose Graph Optimization** problem.
+We minimize the error:
+
+`E = sum( (z_i - h(x_i))^2 )`
+
+Where z_i is the sensor measurement and x_i is the estimated pose.

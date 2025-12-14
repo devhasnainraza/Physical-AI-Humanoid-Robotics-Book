@@ -24,7 +24,43 @@ Nav2 is not a single node; it is a collection of servers managed by a Behavior T
 
 ---
 
-## 2. Costmaps: The World Representation
+## 2. A* Algorithm: The Planner's Core
+
+A* finds the shortest path by minimizing $f(n) = g(n) + h(n)$.
+-   $g(n)$: Cost from Start to current node $n$.
+-   $h(n)$: Heuristic cost from $n$ to Goal (usually Euclidean distance).
+
+### Pseudocode
+
+```python
+open_set = {start_node}
+came_from = {}
+
+g_score[start] = 0
+f_score[start] = heuristic(start, goal)
+
+while open_set is not empty:
+    current = node in open_set with lowest f_score
+    if current == goal:
+        return reconstruct_path(came_from, current)
+
+    open_set.remove(current)
+    
+    for neighbor in neighbors(current):
+        tentative_g = g_score[current] + dist(current, neighbor)
+        if tentative_g < g_score[neighbor]:
+            came_from[neighbor] = current
+            g_score[neighbor] = tentative_g
+            f_score[neighbor] = tentative_g + heuristic(neighbor, goal)
+            if neighbor not in open_set:
+                open_set.add(neighbor)
+```
+
+In robotics, the cost function also includes the **Costmap Value** (don't hug the walls!).
+
+---
+
+## 3. Costmaps: The World Representation
 
 A **Costmap** is a 2D grid where each cell has a value (0-255).
 -   **0**: Free space (Safe).
@@ -32,13 +68,17 @@ A **Costmap** is a 2D grid where each cell has a value (0-255).
 -   **255**: Unknown.
 -   **1-253**: Inflation Radius (Danger zone near walls).
 
-### 2.1 Inflation Layer
+### 3.1 Layered Costmaps
 
-Robots are not points; they have a radius. The Inflation Layer adds a "buffer" around obstacles so the center of the robot doesn't get too close to the wall.
+The final map is a sum of layers:
+1.  **Static Layer**: The building walls (from SLAM).
+2.  **Obstacle Layer**: Real-time LiDAR hits (People).
+3.  **Inflation Layer**: Adds a gradient around obstacles.
+4.  **Voxel Layer**: 3D obstacles (e.g., tables) mapped to 2D.
 
 ---
 
-## 3. Behavior Trees (BT)
+## 4. Behavior Trees (BT)
 
 Nav2 uses an XML-based **Behavior Tree** to orchestrate the logic. This is more flexible than a state machine.
 
@@ -71,11 +111,9 @@ Nav2 uses an XML-based **Behavior Tree** to orchestrate the logic. This is more 
 </root>
 ```
 
-**Translation**: "Try to plan and follow a path. If that fails, clear the map, spin around to look for a way out, wait 5 seconds, and try again. Do this 6 times before giving up."
-
 ---
 
-## 4. MPPI for Humanoids
+## 5. MPPI for Humanoids
 
 For humanoid robots, standard controllers (DWB) often fail because they assume a circular or rectangular footprint that moves smoothly.
 

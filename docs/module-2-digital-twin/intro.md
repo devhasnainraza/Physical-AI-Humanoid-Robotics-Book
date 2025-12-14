@@ -18,7 +18,27 @@ A **Digital Twin** is not just a 3D model; it is a physics-accurate replica that
 
 ---
 
-## 2. Physics Engines: ODE vs Bullet vs PhysX
+## 2. Numerical Integration: The Heart of Physics
+
+Physics engines solve differential equations $F=ma$ over discrete time steps.
+
+### 2.1 Euler Method (Fast, Unstable)
+```
+v(t+1) = v(t) + a(t) * dt
+x(t+1) = x(t) + v(t) * dt
+```
+
+If dt is too large (e.g., 100ms), errors accumulate, and the robot might explode into space.
+
+### 2.2 Runge-Kutta 4 (RK4) (Slow, Accurate)
+Takes 4 samples of the slope during the time step to calculate the average change. Used for high-precision simulations (e.g., NASA robotics).
+
+### 2.3 Semi-Implicit Euler (Symplectic)
+The gold standard for robotics (used in Isaac Gym). It conserves energy better than standard Euler, preventing the "vibrating robot" syndrome.
+
+---
+
+## 3. Physics Engines: ODE vs Bullet vs PhysX
 
 Gazebo (and Ignition/Gazebo Sim) allows you to choose your underlying physics engine.
 
@@ -28,7 +48,7 @@ Gazebo (and Ignition/Gazebo Sim) allows you to choose your underlying physics en
 | **Bullet** | Better collision detection | Slower than ODE | Games, object manipulation |
 | **NVIDIA PhysX** | GPU-accelerated, massive scale | Proprietary (until recently), requires NVIDIA GPU | **Humanoid RL Training** (Isaac Gym) |
 
-### 2.1 The Time Step
+### 3.1 The Time Step
 
 Simulations run in discrete time steps (e.g., 1ms).
 -   **Real-time Factor**: If ratio < 1.0, the sim is running slower than real life.
@@ -36,7 +56,7 @@ Simulations run in discrete time steps (e.g., 1ms).
 
 ---
 
-## 3. Gazebo Architecture
+## 4. Gazebo Architecture
 
 Gazebo is split into two main processes:
 
@@ -52,7 +72,7 @@ graph LR
 
 ---
 
-## 4. Hands-On: Launching an Empty World
+## 5. Hands-On: Launching an Empty World
 
 To start a basic simulation environment:
 
