@@ -1,47 +1,76 @@
-# Physical AI & Humanoid Robotics Textbook (Cortex-H1)
+# 🤖 Physical AI & Humanoid Robotics Textbook
 
-Official textbook platform for the "Certified Agentic AI & Robotics Engineer" course.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Deploy to GitHub Pages](https://github.com/devhasnainraza/Physical-AI-Humanoid-Robotics-Book/actions/workflows/deploy.yml/badge.svg)](https://github.com/devhasnainraza/Physical-AI-Humanoid-Robotics-Book/actions/workflows/deploy.yml)
 
-## Features
-- **4-Module Syllabus**: ROS 2, Digital Twin, AI-Robot Brain, VLA.
-- **Hardware Profiling**: Content adapts for Unitree Go2, Jetson Orin, or Cloud Simulation.
-- **RAG Chatbot**: Ask questions about the content (Context-Aware).
-- **Agentic Translation**: Translate pages to Urdu/Hindi on-the-fly.
+> **"The body is the brain's interface to the world."**
 
-## Prerequisites
+Welcome to **Cortex-H1**, an AI-native open-source textbook designed to teach the next generation of Robotics Engineers how to build **Embodied Intelligence**.
+
+📘 **[Read the Book Online](https://devhasnainraza.github.io/Physical-AI-Humanoid-Robotics-Book/)**
+
+---
+
+## 🌍 Overview
+
+This project bridges the gap between **Generative AI** (LLMs) and **Physical Robotics** (ROS 2). It provides a complete curriculum from basic motor control to advanced Vision-Language-Action (VLA) models.
+
+### 🧩 Core Modules
+
+| Module | Focus | Tech Stack |
+| :--- | :--- | :--- |
+| **1. The Robotic Nervous System** | Middleware & Control | ROS 2 (Humble), Python `rclpy`, DDS |
+| **2. The Digital Twin** | Simulation & Physics | Gazebo Harmonic, SDF, URDF |
+| **3. The AI-Robot Brain** | Navigation & Perception | NVIDIA Isaac Sim, Nav2, VSLAM |
+| **4. Vision-Language-Action** | Agentic AI | OpenAI Whisper, LangChain, Gemini |
+
+---
+
+## 🚀 Features
+
+- **Interactive RAG Chatbot**: Highlight any text in the book to ask our AI Tutor a question.
+- **Hardware Profiles**: Content adapts whether you have a **Unitree Go2**, a **Jetson Orin**, or just a **Cloud Simulator**.
+- **Polyglot**: Instant translation to Urdu/Hindi for accessibility.
+- **Agentic**: Built-in support for running Python agents directly from the labs.
+
+---
+
+## 🛠 Installation (Local Development)
+
+You can run this textbook locally to contribute.
+
+### Prerequisites
 - Node.js 18+
-- Docker (for Qdrant/Postgres)
-- OpenAI & Gemini API Keys
+- Python 3.10+
 
-## Setup
+### Steps
+1.  **Clone the repo**
+    ```bash
+    git clone https://github.com/devhasnainraza/Physical-AI-Humanoid-Robotics-Book.git
+    cd Physical-AI-Humanoid-Robotics-Book
+    ```
 
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-2. **Environment Variables**
-   Copy `.env.local` and fill in your keys.
+3.  **Run the dev server**
+    ```bash
+    npm run start
+    ```
+    Open `http://localhost:3000` in your browser.
 
-3. **Start Infrastructure**
-   ```bash
-   docker-compose up -d
-   ```
+---
 
-4. **Initialize Knowledge Base**
-   ```bash
-   npm run qdrant:setup
-   # or
-   node scripts/setup_qdrant.js
-   ```
+## 🤝 Contributing
 
-5. **Start Development Server**
-   ```bash
-   npm start
-   ```
+We welcome contributions! Please see `CONTRIBUTING.md` (coming soon) for details on how to submit Pull Requests.
 
-## RAG Ingestion
-To index new content:
-```bash
-python scripts/rag_ingest.py
-```
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+*Built for the GIAIC Physical AI Hackathon.*
