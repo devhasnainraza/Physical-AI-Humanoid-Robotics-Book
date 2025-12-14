@@ -1,9 +1,0 @@
-node_modules
-build
-.docusaurus
-.git
-.env.local
-.gemini
-.specify
-history
-specs
