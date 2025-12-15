@@ -28,7 +28,7 @@ This project bridges the gap between **Generative AI** (LLMs) and **Physical Rob
 
 ## 🚀 Features
 
-- **Interactive RAG Chatbot**: Highlight any text in the book to ask our AI Tutor a question.
+- **Interactive RAG Chatbot**: Highlight any text in the book to ask our AI Tutor a question. Powered by OpenAI ChatKit/Agents SDK, Qdrant Cloud, and Neon Postgres. [Setup Guide](./RAG_CHATBOT_SETUP.md)
 - **Hardware Profiles**: Content adapts whether you have a **Unitree Go2**, a **Jetson Orin**, or just a **Cloud Simulator**.
 - **Polyglot**: Instant translation to Urdu/Hindi for accessibility.
 - **Agentic**: Built-in support for running Python agents directly from the labs.
