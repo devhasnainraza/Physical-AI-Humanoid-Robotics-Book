@@ -63,7 +63,7 @@ async def chat(request: ChatRequest):
     context = ""
     try:
         embedding = genai.embed_content(
-            model="models/embedding-001",
+            model="models/text-embedding-004",
             content=request.message,
             task_type="retrieval_query"
         )['embedding']

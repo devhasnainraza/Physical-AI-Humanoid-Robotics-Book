@@ -7,27 +7,29 @@ from bs4 import BeautifulSoup
 from typing import List
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
-import cohere
+import google.generativeai as genai
 from tqdm import tqdm
 from dotenv import load_dotenv
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import uuid
 
 # Load keys
 load_dotenv()
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_KEY = os.getenv("QDRANT_API_KEY")
-COHERE_KEY = os.getenv("COHERE_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-if not QDRANT_URL or not QDRANT_KEY or not COHERE_KEY:
-    print("❌ Error: Please set QDRANT_URL, QDRANT_API_KEY, and COHERE_API_KEY in .env")
+if not QDRANT_URL or not QDRANT_KEY or not GEMINI_API_KEY:
+    print("❌ Error: Please set QDRANT_URL, QDRANT_API_KEY, and GEMINI_API_KEY in .env")
     exit(1)
 
 # Initialize Clients
 qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_KEY)
-co = cohere.Client(COHERE_KEY)
+genai.configure(api_key=GEMINI_API_KEY)
 
 COLLECTION_NAME = "textbook_knowledge"
-EMBED_MODEL = "embed-english-v3.0"
+# using the latest text embedding model
+EMBED_MODEL = "models/text-embedding-004"
 SITEMAP_URL = "https://devhasnainraza.github.io/Cortex-H1/sitemap.xml"
 
 def get_urls_from_sitemap(sitemap_url: str) -> List[str]:
@@ -61,19 +63,23 @@ def scrape_and_clean_text(url: str) -> str:
         return ""
 
 def get_embedding_batch(texts: List[str]) -> List[List[float]]:
-    """Generates embeddings for a batch of texts using Cohere with retry logic."""
+    """Generates embeddings for a batch of texts using Gemini with retry logic."""
     retries = 10
     delay = 5
     for i in range(retries):
         try:
-            response = co.embed(
-                texts=texts,
+            # Gemini embedding call
+            # For retrieval tasks, we should specify task_type="retrieval_document" for ingestion
+            result = genai.embed_content(
                 model=EMBED_MODEL,
-                input_type="search_document"
+                content=texts,
+                task_type="retrieval_document",
+                title="Textbook Content" # Optional, helps with some models
             )
-            return response.embeddings
+            # Result is a dict with 'embedding' key which is a list of embeddings if input was a list
+            return result['embedding']
         except Exception as e:
-            if "429" in str(e): # Check for rate limit error
+            if "429" in str(e) or "Resource exhausted" in str(e): # Check for rate limit error
                 print(f"    Rate limit hit, retrying in {delay} seconds...")
                 time.sleep(delay)
                 delay *= 2 # Exponential backoff
@@ -94,9 +100,10 @@ def ingest_sitemap():
     print(f"🚀 Starting Ingestion to Qdrant collection: {COLLECTION_NAME}")
     
     # 1. Recreate Collection
+    # Gemini text-embedding-004 has 768 dimensions
     qdrant.recreate_collection(
         collection_name=COLLECTION_NAME,
-        vectors_config=models.VectorParams(size=1024, distance=models.Distance.COSINE),
+        vectors_config=models.VectorParams(size=768, distance=models.Distance.COSINE),
     )
 
     # 2. Fetch and process URLs from sitemap
@@ -112,7 +119,8 @@ def ingest_sitemap():
         chunks = chunk_text(text_content)
         
         # Batch processing
-        batch_size = 96
+        # Gemini allows batch sizes up to 100 usually, but let's be safe with 10 to avoid huge payloads/timeouts
+        batch_size = 10 
         for i in range(0, len(chunks), batch_size):
             batch_chunks = chunks[i:i + batch_size]
             print(f"  - Processing batch {i//batch_size + 1}/{(len(chunks) + batch_size - 1)//batch_size}...")
@@ -121,8 +129,8 @@ def ingest_sitemap():
                 embeddings = get_embedding_batch(batch_chunks)
                 
                 points_to_upsert = [
-                    models.Point(
-                        id=f"{url}-{i+j}",
+                    models.PointStruct(
+                        id=str(uuid.uuid5(uuid.NAMESPACE_URL, f"{url}-{i+j}")),
                         vector=embedding,
                         payload={"text": chunk, "source": url}
                     )
@@ -135,6 +143,9 @@ def ingest_sitemap():
                 )
                 total_segments += len(points_to_upsert)
                 print(f"    ✅ Upserted {len(points_to_upsert)} points.")
+                
+                # Add a small delay to respect rate limits
+                time.sleep(1)
 
             except Exception as e:
                 print(f"⚠️ Error processing batch for {url}: {e}")

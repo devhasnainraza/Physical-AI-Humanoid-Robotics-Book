@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ReactMarkdown from "react-markdown";
@@ -207,7 +206,7 @@ export default function ChatWidget() {
   useEffect(() => {
     if (isUserNearBottom && messagesEndRef.current) {
       requestAnimationFrame(() => {
-        messagesEndRef.current?.scrollIntoView({ 
+        messagesEndRef.current?.scrollIntoView({
           behavior: "smooth", 
           block: "end" 
         });
@@ -333,7 +332,7 @@ export default function ChatWidget() {
       const streamingMessageId = `streaming-${Date.now()}`;
       setMessages(prev => [
         ...prev, 
-        { 
+        {
           id: streamingMessageId, 
           role: "model", 
           content: "", 
@@ -448,7 +447,7 @@ export default function ChatWidget() {
       
       <div className="flex items-center gap-1">
         <button 
-          onClick={() => { if(confirm("Clear all chat history?")) clearHistory(); }} 
+          onClick={() => { if(confirm("Clear all chat history?")) clearHistory(); }}
           className="p-2 text-slate-500 hover:bg-red-100 dark:hover:bg-red-900/20 hover:text-red-500 rounded-lg transition-all active:scale-95"
           title="Clear History"
         >
@@ -558,7 +557,7 @@ export default function ChatWidget() {
               
               <div className={`max-w-[85%] group relative ${m.role === "user" ? "order-first" : ""}`}>
                 <div 
-                  className={`px-4 py-3 rounded-[20px] shadow-sm border ${
+                  className={`px-4 py-3 rounded-[20px] shadow-sm border ${ 
                     m.role === "user" 
                       ? `${THEME.userBubble} ${THEME.userText} border-emerald-500/30` 
                       : `${THEME.modelBubble} ${THEME.modelText} border-slate-200/50 dark:border-slate-700/50`
