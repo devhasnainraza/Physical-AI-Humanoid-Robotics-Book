@@ -74,3 +74,11 @@ specs/001-physical-ai-textbook/
 |-----------|------------|-------------------------------------|
 | Custom Auth in Static Site | Dynamic Personalization | Static site cannot handle per-user content hiding securely/effectively |
 | Python Script + Node App | RAG Ecosystem | Python has better library support (LangChain/LlamaIndex) for RAG ingestion |
+| **Gemini 2.0 Flash** | **Translation (Article III Deviation)** | **Authorized deviation**: Chosen for superior multilingual token efficiency and cost-effectiveness for full-page translation tasks compared to GPT-4o. |
+
+## Architecture Refinement
+
+**Hybrid Deployment Strategy**:
+- **Frontend**: Docusaurus static build (hosted on Vercel/Netlify).
+- **Backend API**: Vercel Serverless Functions located in `api/` directory (handling Chat and Translation).
+- **Auth Service**: Standalone Express server (`auth-server.ts`) or Vercel adaptation for Better Auth.

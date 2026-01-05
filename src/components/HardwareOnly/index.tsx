@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHardwareProfile } from '../Auth/AuthProvider';
+import { useUser } from '@clerk/clerk-react';
 
 interface HardwareOnlyProps {
   profile: string;
@@ -7,13 +7,14 @@ interface HardwareOnlyProps {
 }
 
 export default function HardwareOnly({ profile, children }: HardwareOnlyProps) {
-  const { hardwareProfile } = useHardwareProfile();
+  const { user, isLoaded } = useUser();
 
-  // Show if user has specific profile OR if user has no profile (cloud simulation default) 
-  // Wait, logic in spec: "Content inside these tags should only render if the logged-in user has that specific hardware profile."
-  // So strict match.
-  
-  if (hardwareProfile === profile) {
+  if (!isLoaded) return null;
+
+  // Default everyone to 'Cloud_Simulation_Only' if not set
+  const userProfile = (user?.unsafeMetadata?.hardware_profile as string) || 'Cloud_Simulation_Only';
+
+  if (userProfile === profile) {
     return <>{children}</>;
   }
 

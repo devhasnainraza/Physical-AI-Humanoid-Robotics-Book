@@ -9,7 +9,7 @@ import Heading from '@theme/Heading';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <header className="relative overflow-hidden bg-gray-900 text-white py-24 lg:py-32">
+    <header className="relative overflow-hidden bg-gray-900 text-white py-16 md:py-24 lg:py-32">
       {/* Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-600/30 rounded-full blur-[120px] mix-blend-screen animate-blob"></div>
@@ -26,7 +26,7 @@ function HomepageHeader() {
           <span className="text-xs font-medium tracking-wide text-green-300">Hackathon I Edition</span>
         </div>
 
-        <Heading as="h1" className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 animate-fade-in-up animation-delay-100">
+        <Heading as="h1" className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 animate-fade-in-up animation-delay-100">
           Build the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-teal-400 to-green-400">Body</span> <br className="hidden md:block" />
           for the <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400">Digital Brain</span>
         </Heading>
@@ -39,8 +39,8 @@ function HomepageHeader() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-300">
           <Link
             className="button button--primary button--lg px-8 py-4 text-lg font-bold rounded-full shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform"
-            to="/docs/module-1-ros2/lab-urdf">
-            Start Learning 🚀
+            to="/docs/module-1-ros2/foundations-physical-ai">
+            Start Learning ✨
           </Link>
           <Link
             className="button button--secondary button--lg px-8 py-4 text-lg font-bold rounded-full bg-white/10 border border-white/20 backdrop-blur-md hover:bg-white/20 transition-all"
@@ -55,7 +55,7 @@ function HomepageHeader() {
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Ros_logo.svg" className="h-8 w-auto invert" alt="ROS 2" />
             <img src="https://upload.wikimedia.org/wikipedia/sco/thumb/2/21/Nvidia_logo.svg/960px-Nvidia_logo.svg.png?20150924223142" className="h-6 w-auto invert" alt="NVIDIA" />
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Unity_Technologies_logo.svg" className="h-8 w-auto invert" alt="Unity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" className="h-8 w-auto invert" alt="Gemini" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" className="h-6 w-auto invert" alt="Gemini" />
         </div>
       </div>
     </header>
@@ -87,6 +87,9 @@ const Curriculum = () => (
                     { title: "The Digital Twin", desc: "Build physics-accurate simulations in Gazebo & Unity.", color: "bg-teal-500", icon: "🏗️" },
                     { title: "The AI Brain", desc: "Implement VSLAM, Nav2, and NVIDIA Isaac ROS.", color: "bg-purple-500", icon: "🧠" },
                     { title: "Vision-Language-Action", desc: "Deploy Transformer models for end-to-end autonomy.", color: "bg-pink-500", icon: "🤖" },
+                    { title: "Adv. Locomotion", desc: "MPC & Whole-Body Control for stable walking.", color: "bg-orange-500", icon: "fg" },
+                    { title: "Dexterous Manipulation", desc: "Grasping, Tactile Sensing & Dual-Arm tasks.", color: "bg-yellow-500", icon: "✋" },
+                    { title: "Human-Robot Interaction", desc: "Social Navigation & ISO Safety Standards.", color: "bg-red-500", icon: "🤝" },
                 ].map((item, i) => (
                     <div key={i} className="relative group">
                         <div className={`w-24 h-24 mx-auto ${item.color} bg-opacity-10 dark:bg-opacity-20 rounded-3xl flex items-center justify-center mb-6 relative z-10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
@@ -109,7 +112,7 @@ const Curriculum = () => (
     </section>
 );
 
-export default function Home(): JSX.Element {
+export default function Home(): React.JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout

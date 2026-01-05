@@ -35,7 +35,7 @@ description: "Task list for Physical AI & Humanoid Robotics Textbook implementat
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 Configure Better Auth with PostgreSQL adapter in `api/auth/[...auth].ts` (or equivalent Docusaurus API route)
+- [ ] T006 Refine/Verify Better Auth configuration in `auth-server.ts` (Hybrid Mode)
 - [ ] T007 [P] Create `HardwareProfile` enum and extend User schema in `api/auth/schema.ts` (if applicable) or database migration
 - [ ] T008 [P] Setup API route handler structure in `api/` to support custom endpoints (Chat, Translation)
 - [ ] T009 [P] Create Qdrant collection `textbook_knowledge` using setup script or curl (Created scripts/setup_qdrant.js)
@@ -87,7 +87,7 @@ description: "Task list for Physical AI & Humanoid Robotics Textbook implementat
 ### Implementation for User Story 3
 
 - [ ] T018 [P] [US3] Create Python ingestion script `scripts/rag_ingest.py` to parse MD files and upsert to Qdrant
-- [ ] T019 [US3] Implement RAG API endpoint `api/chat/route.ts` using ChatKit/LangChain to query Qdrant
+- [ ] T019 [US3] Refine/Verify RAG API endpoint `api/chat/route.ts` using ChatKit/LangChain to query Qdrant (Ensure Vercel Function compatibility)
 - [ ] T020 [P] [US3] Create `ChatWidget` component in `src/components/ChatWidget/index.tsx` using ChatKit UI
 - [ ] T021 [US3] Implement global `mouseup` listener in `src/theme/Layout/index.tsx` (swizzle Layout) to detect selection
 - [ ] T022 [US3] Connect selection event to `ChatWidget` state to pre-fill input box
@@ -104,9 +104,9 @@ description: "Task list for Physical AI & Humanoid Robotics Textbook implementat
 
 ### Implementation for User Story 4
 
-- [ ] T023 [P] [US4] Implement Translation API endpoint `api/translate/route.ts` using Gemini 2.0 Flash SDK
+- [ ] T023 [P] [US4] Refine/Verify Translation API endpoint `api/translate/route.ts` using Gemini 2.0 Flash SDK (Ensure Vercel Function compatibility)
 - [ ] T024 [P] [US4] Create `Translator` button component in `src/components/Translator/index.tsx`
-- [ ] T025 [US4] Implement client-side logic to replace DOM text nodes with translated content (preserving `<pre>/<code>`)
+- [ ] T025 [US4] Implement client-side logic to replace DOM text nodes with translated content (use React Portal or targeted ID replacement to avoid hydration errors)
 - [ ] T026 [US4] Verify code block preservation on a page with Python snippets
 
 ---
@@ -118,6 +118,8 @@ description: "Task list for Physical AI & Humanoid Robotics Textbook implementat
 - [ ] T027 [P] Clean up temporary test pages
 - [ ] T028 Update `README.md` with setup instructions
 - [ ] T029 Perform full regression test of all 4 modules and profiles
+- [ ] T030 [US3] Create RAG Evaluation Test Set (questions + expected answers) (SC-004)
+- [ ] T031 [US3] Run Relevance Evaluation script/manual test and verify > 80% relevance (SC-004)
 
 ---
 
