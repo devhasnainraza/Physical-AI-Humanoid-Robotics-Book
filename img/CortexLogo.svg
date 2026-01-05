@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Solid Teal Hexagon -->
+  <path d="M256 64 L422 160 V352 L256 448 L90 352 V160 Z" 
+        fill="none" stroke="#25C2A0" stroke-width="40" stroke-linejoin="round"/>
+        
+  <!-- Center Node -->
+  <circle cx="256" cy="256" r="60" fill="#25C2A0" />
+  
+  <!-- Connections -->
+  <path d="M256 256 L256 64" stroke="#25C2A0" stroke-width="20" stroke-linecap="round" />
+  <path d="M256 256 L422 352" stroke="#25C2A0" stroke-width="20" stroke-linecap="round" />
+  <path d="M256 256 L90 352" stroke="#25C2A0" stroke-width="20" stroke-linecap="round" />
+
+  <!-- Inner Spark -->
+  <circle cx="256" cy="256" r="25" fill="#ffffff" />
+</svg>

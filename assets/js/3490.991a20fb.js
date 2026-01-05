@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkcortex_h1=globalThis.webpackChunkcortex_h1||[]).push([[3490],{3490:(e,c,h)=>{h.d(c,{createInfoServices:()=>a.v});var a=h(1885);h(7960)}}]);
