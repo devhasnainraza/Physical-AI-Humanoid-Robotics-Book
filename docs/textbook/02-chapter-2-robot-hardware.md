@@ -108,7 +108,7 @@ The "Cortex".
 
 ### 2.3.3 Communication Buses
 *   **CAN Bus (Controller Area Network)**: Robust, differential pair. Used for connecting motors.
-*   **EtherCAT**: Industrial Ethernet. Extremely fast, synchronized (<1us jitter).
+*   **EtherCAT**: Industrial Ethernet. Extremely fast, synchronized (&lt;1us jitter).
 *   **UART / SPI / I2C**: Board-level comms.
 
 ## 2.4 Power Systems
