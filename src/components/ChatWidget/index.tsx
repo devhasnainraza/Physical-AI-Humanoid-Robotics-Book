@@ -4631,7 +4631,7 @@ export default function ChatWidget() {
   const Header = () => (
     <div className="relative z-10 px-4 py-3 flex items-center justify-between border-b border-white/20 dark:border-slate-700/50 backdrop-blur-md bg-white/30 dark:bg-slate-900/30">
       <div className="flex items-center gap-3">
-        <img src="static/img/CortexLogo.svg" alt="Cortex Logo" className="w-10 h-10" />
+        <img src="/img/CortexLogo.svg" alt="Cortex Logo" className="w-10 h-10" />
         <div>
           <h3 className="font-bold text-sm dark:text-white text-slate-800">Cortex Assistant</h3>
           <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -4718,7 +4718,7 @@ export default function ChatWidget() {
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full text-center p-4">
               <div className="mb-4 p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-full">
-                <img src="static/img/cortex-logo.svg" alt="Cortex Logo" className="w-8 h-8" />
+                <img src="/img/cortex-logo.svg" alt="Cortex Logo" className="w-8 h-8" />
               </div>
               <h3 className="font-bold text-lg mb-2 text-white">How can I help you today?</h3>
               <p className="text-slate-500 dark:text-slate-400 mb-4">Ask me anything about this page or related topics</p>
@@ -4746,7 +4746,7 @@ export default function ChatWidget() {
             >
               {m.role === "model" && (
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br flex items-center justify-center shrink-0 mt-1">
-                  <img src="static/img/CortexLogo.svg" alt="Cortex Logo" className="w-9 h-9" />
+                  <img src="/img/CortexLogo.svg" alt="Cortex Logo" className="w-9 h-9" />
                 </div>
               )}
               
