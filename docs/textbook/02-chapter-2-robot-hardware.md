@@ -115,7 +115,7 @@ The "Cortex".
 
 ### 2.4.1 Batteries
 *   **LiPo (Lithium Polymer)**: High "C-Rating" (Discharge rate). Dangerous (Fire risk if punctured/overcharged).
-*   **Li-Ion (18650/21700 Cylinders)**: Safer, higher density, lower current. (Tesla packs).
+*   **Li-Ion (`18650`/`21700` Cylinders)**: Safer, higher density, lower current. (Tesla packs).
 
 **Voltage Sag**: $V_{term} = V_{oc} - I \cdot R_{internal}$.
 Under high load (jumping), voltage drops. Compute needs a **Regulator** (Buck Converter) to stay stable at 5V/12V, or it will brownout and reboot.
