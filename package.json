@@ -33,6 +33,7 @@
     "ai": "^5.0.113",
     "better-auth": "^1.4.7",
     "clsx": "^2.0.0",
+    "cohere": "^1.1.1",
     "cohere-ai": "^7.9.3",
     "cors": "^2.8.5",
     "docusaurus-plugin-image-zoom": "^3.0.1",
