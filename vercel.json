@@ -1,18 +1,17 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "framework": "docusaurus",
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/api/py/:path*",
-      "destination": "/api/py/index.py"
+      "src": "api/py/index.py",
+      "use": "@vercel/python"
     }
   ],
-  "functions": {
-    "api/py/index.py": {
-      "memory": 1024,
-      "maxDuration": 10,
-      "runtime": "python3.9"
+  "routes": [
+    {
+      "src": "/api/py/(.*)",
+      "dest": "/api/py/index.py"
     }
-  }
+  ],
+  "buildCommand": "echo 'Skipping frontend build for backend-only deployment'",
+  "outputDirectory": "."
 }
