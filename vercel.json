@@ -1,0 +1,18 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "docusaurus",
+  "rewrites": [
+    {
+      "source": "/api/py/:path*",
+      "destination": "/api/py/index.py"
+    }
+  ],
+  "functions": {
+    "api/py/index.py": {
+      "memory": 1024,
+      "maxDuration": 10,
+      "runtime": "python3.9"
+    }
+  }
+}
