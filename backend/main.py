@@ -49,9 +49,52 @@ class ChatRequest(BaseModel):
     message: str
     selected_text: str = ""
 
+class TranslationRequest(BaseModel):
+    content: str
+    target_language: str = "ur"
+    api_key: str = None
+
 @app.get("/")
 def read_root():
     return {"status": "Physical AI Backend is Running"}
+
+@app.post("/translate")
+async def translate(request: TranslationRequest):
+    try:
+        # Use user provided key or fallback to env
+        key_to_use = request.api_key or GEMINI_API_KEY
+        if not key_to_use:
+            raise HTTPException(status_code=400, detail="API Key required")
+        
+        # Configure temp client
+        genai.configure(api_key=key_to_use)
+        
+        # Use Flash 2.0 as requested
+        model = genai.GenerativeModel('gemini-2.0-flash')
+        
+        lang_name = "Urdu" if request.target_language == "ur" else "Hindi"
+        
+        prompt = f"""You are a professional technical translator. 
+        Translate the following HTML content to {lang_name}.
+        
+        CRITICAL RULES:
+        1. Return ONLY the inner HTML content. DO NOT wrap in <html>, <body>, or markdown code blocks.
+        2. DO NOT change any class names, ids, or structure.
+        3. DO NOT add dir="rtl" to the root div (it breaks the site layout).
+        4. DO NOT translate code blocks (<pre>, <code>).
+        
+        Content:
+        {request.content}"""
+        
+        response = model.generate_content(prompt)
+        translated_text = response.text
+        
+        # Cleanup
+        translated_text = translated_text.replace("```html", "").replace("```", "").strip()
+        
+        return {"translated_text": translated_text}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/chat")
 async def chat(request: ChatRequest):

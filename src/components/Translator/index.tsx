@@ -545,26 +545,28 @@ export default function Translator() {
     }
 
     try {
-      const { GoogleGenerativeAI } = await import("@google/generative-ai");
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+      // Connect to Backend
+      const BACKEND_URL = "https://cortex-h1.vercel.app/api/py"; 
+      
+      const response = await fetch(`${BACKEND_URL}/translate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: originalContent || contentDiv.innerHTML,
+          target_language: lang,
+          api_key: apiKey // Send user's key to backend
+        }),
+      });
 
-      const prompt = `You are a professional technical translator. 
-Translate the following HTML content to Urdu.
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.detail || "Translation failed");
+      }
 
-CRITICAL RULES:
-1. Return ONLY the inner HTML content. DO NOT wrap in <html>, <body>, or markdown code blocks.
-2. DO NOT change any class names, ids, or structure.
-3. DO NOT add dir="rtl" to the root div (it breaks the site layout).
-4. DO NOT translate code blocks (<pre>, <code>).
-
-Content:
-${originalContent || contentDiv.innerHTML}`;
-
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      let translatedText = response.text();
-      translatedText = translatedText.replace(/^```html\s*/, '').replace(/\s*```$/, '');
+      const data = await response.json();
+      let translatedText = data.translated_text;
 
       if (translatedText) {
         contentDiv.innerHTML = translatedText;
