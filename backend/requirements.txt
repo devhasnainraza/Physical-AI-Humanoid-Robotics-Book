@@ -3,13 +3,8 @@ uvicorn[standard]
 pydantic
 qdrant-client
 google-generativeai
-cohere
 python-dotenv
 mangum
-openai>=1.0.0
 asyncpg
 sqlalchemy[asyncio]>=2.0.0
 psycopg2-binary
-langchain-text-splitters
-sentence-transformers
-torch
