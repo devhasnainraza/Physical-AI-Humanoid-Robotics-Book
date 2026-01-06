@@ -35,7 +35,7 @@ This is not just a theoretical textbook. It's a hands-on, code-first guide to bu
 *   **🏗️ Digital Twins**: Mastering sim-to-real transfer with industry-standard tools like NVIDIA Isaac Sim and Gazebo.
 *   **🏃 Advanced Control**: Implementing Model Predictive Control (MPC) and Whole-Body Control (WBC) for stable bipedal locomotion.
 
-![VVIP Homepage](https://raw.githubusercontent.com/devhasnainraza/Cortex-H1/main/output/vvip-homepage-screenshot.png) 
+![VVIP Homepage](https://raw.githubusercontent.com/devhasnainraza/Cortex-H1/main/output/homepage-screenshot.png) 
 *(This is a placeholder image. Please replace it with a screenshot of the new homepage.)*
 
 ### Built With
@@ -102,6 +102,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information (Note:
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_twitter) - email@example.com
+Your Name - [@Muhammad Hasnain](https://x.com/mhattari1112) - email@example.com
 
 Project Link: [https://github.com/devhasnainraza/Cortex-H1](https://github.com/devhasnainraza/Cortex-H1)
