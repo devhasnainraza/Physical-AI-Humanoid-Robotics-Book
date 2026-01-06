@@ -28,7 +28,7 @@ QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-2.5-flash')
 
 # Database (In-Memory for Demo)
 chat_db: Dict[str, List[Dict[str, str]]] = {}
@@ -70,7 +70,7 @@ async def translate(request: TranslationRequest):
         genai.configure(api_key=key_to_use)
         
         # Use Flash 2.0 as requested
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         
         lang_name = "Urdu" if request.target_language == "ur" else "Hindi"
         

@@ -325,7 +325,7 @@ export default function ChatWidget() {
 
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
       const prompt = `Context: "${context || ""}"\n\nQuestion: "${finalMsg}"`;
 
@@ -661,37 +661,8 @@ export default function ChatWidget() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* 🆕 ✨ ENHANCED SCROLL-TO-BOTTOM BUTTON */}
-        {hasNewMessages && (
-          <button
-            onClick={() => {
-              setHasNewMessages(false);
-              messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className={`
-              absolute bottom-24 right-4 z-20
-              w-10 h-10 rounded-full
-              bg-gradient-to-r from-emerald-500 to-teal-500
-              text-white flex items-center justify-center
-              shadow-lg shadow-emerald-500/30
-              hover:shadow-emerald-500/50
-              hover:scale-105
-              active:scale-95
-              transition-all duration-200
-              animate-pulse
-              group
-            `}
-            aria-label="New messages — click to scroll to bottom"
-            title="New messages • Scroll down"
-          >
-            <Sparkles 
-              size={18} 
-              className="group-hover:rotate-12 transition-transform duration-300" 
-            />
-            {/* Subtle animated ring for attention */}
-            <div className="absolute inset-0 rounded-full border-2 border-white/30 animate-ping opacity-20" />
-          </button>
-        )}
+       
+        {/* )} */}
 
         <div className="relative z-10 p-3 border-t border-white/20 dark:border-slate-700/50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md">
           <QuickActions />
