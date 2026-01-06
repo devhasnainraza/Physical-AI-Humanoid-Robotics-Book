@@ -3,6 +3,7 @@ import Layout from '@theme-original/Layout';
 import type LayoutType from '@theme/Layout';
 import type {WrapperProps} from '@docusaurus/types';
 import ChatWidget from '@site/src/components/ChatWidget';
+import Translator from '@site/src/components/Translator'; // Import Translator
 import ClerkAuth from '@site/src/components/Auth/ClerkAuth';
 import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import { useLocation } from '@docusaurus/router';

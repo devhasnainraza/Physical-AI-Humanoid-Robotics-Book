@@ -30,7 +30,7 @@ const config: Config = {
   },
   themes: ['@docusaurus/theme-mermaid'],
 
-  // Stylesheets for Math (KaTeX)
+  // Stylesheets for Math (KaTeX) and Fonts
   stylesheets: [
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
@@ -38,6 +38,11 @@ const config: Config = {
       integrity:
         'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3yUy5gfv/I3X',
       crossorigin: 'anonymous',
+    },
+    {
+      href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap',
+      type: 'text/css',
+      rel: 'stylesheet',
     },
   ],
 
@@ -119,6 +124,7 @@ const config: Config = {
       }
     },
     navbar: {
+      hideOnScroll: true,
       title: 'Cortex-H1',
       logo: {
         alt: 'Cortex-H1 Logo',
@@ -131,7 +137,6 @@ const config: Config = {
           position: 'left',
           label: 'Book',
         },
-        // {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/devhasnainraza/Physical-AI-Humanoid-Robotics-Book',
           label: 'GitHub',
@@ -159,19 +164,23 @@ const config: Config = {
       },
       links: [
         {
-          title: 'Docs',
+          title: 'Curriculum',
           items: [
             {
-              label: 'Chapter 1: Foundations',
-              to: '/docs/textbook/chapter-1-foundations',
+              label: 'Module 1: Foundations',
+              to: '/docs/module-1-ros2/foundations-physical-ai',
             },
             {
-              label: 'Chapter 4: Control',
-              to: '/docs/textbook/chapter-4-control-systems',
+              label: 'Module 2: Digital Twin',
+              to: '/docs/module-2-digital-twin/intro-digital-twin',
             },
             {
-              label: 'Chapter 5: Perception',
-              to: '/docs/textbook/chapter-5-perception',
+              label: 'Module 3: AI Brain',
+              to: '/docs/module-3-ai-brain/intro-rl',
+            },
+            {
+              label: 'Module 4: VLA Models',
+              to: '/docs/module-4-vla/intro-vla',
             },
           ],
         },
@@ -179,30 +188,38 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'GitHub Discussions',
+              href: 'https://github.com/devhasnainraza/Physical-AI-Humanoid-Robotics-Book/discussions',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'Discord Server',
+              href: 'https://discord.gg/robotics', // Placeholder or real link if you have one
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'Twitter / X',
+              href: 'https://twitter.com/devhasnainraza',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'Project',
           items: [
             {
-              label: 'GitHub',
+              label: 'About the Author',
+              to: 'https://github.com/devhasnainraza',
+            },
+            {
+              label: 'GitHub Repository',
               href: 'https://github.com/devhasnainraza/Physical-AI-Humanoid-Robotics-Book',
+            },
+            {
+              label: 'Report an Issue',
+              href: 'https://github.com/devhasnainraza/Physical-AI-Humanoid-Robotics-Book/issues',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Cortex-H1. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Cortex-H1 Project. Built with Docusaurus & Love for Robots.`,
     },
   } satisfies Preset.ThemeConfig,
 };

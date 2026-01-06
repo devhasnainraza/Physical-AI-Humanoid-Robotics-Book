@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  /* --- Typography --- */
-  --ifm-font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --ifm-heading-font-family: var(--ifm-font-family-base);
-  --ifm-code-font-size: 95%;
+  /* --- Typography (Executive & Technical) --- */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --ifm-line-height-base: 1.6;
 
-  /* --- Primary Brand Colors (Emerald) --- */
+  /* --- VVIP Palette (Emerald & Deep Slate) --- */
   --ifm-color-primary: #10b981; /* Emerald 500 */
   --ifm-color-primary-dark: #059669;
   --ifm-color-primary-darker: #047857;
@@ -17,279 +17,356 @@
   --ifm-color-primary-lighter: #6ee7b7;
   --ifm-color-primary-lightest: #a7f3d0;
 
-  /* --- Light Mode UI --- */
-  --ifm-background-color: #f8fafc; /* Slate 50 - Softer than white */
+  /* --- Light Mode (Ceramic White) --- */
+  --ifm-background-color: #ffffff;
   --ifm-card-background-color: #ffffff;
   --ifm-paper-background-color: #f8fafc;
-  --ifm-font-color-base: #1e293b; /* Slate 800 */
-  --ifm-color-content-secondary: #64748b; /* Slate 500 */
-  
-  /* Borders & Depth */
-  --ifm-border-color: #e2e8f0; /* Slate 200 */
-  --ifm-toc-border-color: #e2e8f0;
-  
-  /* Navbar Overrides */
+  --ifm-font-color-base: #0f172a; /* Slate 900 */
+  --ifm-color-content-secondary: #475569; /* Slate 600 */
+  --ifm-border-color: #e2e8f0;
+
+  /* Navbar */
   --ifm-navbar-height: 4.5rem;
-  --ifm-navbar-background-color: rgba(255, 255, 255, 0.8);
-  --ifm-navbar-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
-  --ifm-navbar-padding-horizontal: 1.5rem;
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.85);
+  --ifm-navbar-shadow: 0 1px 0 0 rgba(0,0,0,0.05);
+  --ifm-navbar-padding-horizontal: 2rem;
+}
+
+/* --- Mobile Navigation --- */
+.navbar-sidebar {
+  position: fixed !important;
+  top: 0; left: 0; bottom: 0;
+  height: 100vh;
+  width: 85vw;
+  max-width: 360px;
+  background: var(--ifm-background-color) !important;
+  border-right: 1px solid var(--ifm-border-color);
+  z-index: 9999; /* Ensure it's on top */
+  box-shadow: 10px 0 40px rgba(0,0,0,0.1);
 }
 
 [data-theme='dark'] {
-  /* --- Dark Mode UI (Deep Slate) --- */
-  --ifm-background-color: #020617; /* Slate 950 - Premium dark */
+  /* --- Dark Mode (Obsidian) --- */
+  --ifm-background-color: #020617; /* Slate 950 */
   --ifm-card-background-color: #0f172a; /* Slate 900 */
   --ifm-paper-background-color: #020617;
-  --ifm-font-color-base: #e2e8f0; /* Slate 200 */
+  --ifm-font-color-base: #f1f5f9; /* Slate 100 */
   --ifm-color-content-secondary: #94a3b8; /* Slate 400 */
-
-  /* Primary Adjustment for Dark Mode Contrast */
-  --ifm-color-primary: #34d399; /* Emerald 400 - Brighter for dark bg */
-  --ifm-color-primary-dark: #10b981;
-  --ifm-color-primary-darker: #059669;
-  --ifm-color-primary-darkest: #047857;
-  --ifm-color-primary-light: #6ee7b7;
-  --ifm-color-primary-lighter: #a7f3d0;
-  --ifm-color-primary-lightest: #d1fae5;
-  
-  /* Borders & Depth */
   --ifm-border-color: #1e293b; /* Slate 800 */
-  --ifm-toc-border-color: #1e293b;
-  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.05);
 
-  /* Navbar Overrides Dark */
-  --ifm-navbar-background-color: rgba(2, 6, 23, 0.8);
-  --ifm-navbar-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  /* Glow Accents for Dark Mode */
+  --ifm-color-primary: #34d399; /* Emerald 400 */
+  --ifm-navbar-background-color: rgba(2, 6, 23, 0.85);
 }
 
-/* --- Global UI Refinements --- */
-
-/* Smooth Scrolling */
+/* --- Global Refinements --- */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 5px;
-}
-[data-theme='dark'] ::-webkit-scrollbar-thumb {
-  background: #334155;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
-/* Card Enhancements */
-.card {
-  border: 1px solid var(--ifm-border-color);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-radius: 1rem;
+/* --- VVIP++ Ultra-Premium Visuals --- */
+
+/* 1. Shimmer Animation */
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 8s linear infinite;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+/* 2. Text Shimmer Effect */
+.text-shimmer {
+  background: linear-gradient(
+    to right,
+    #10b981 20%,
+    #34d399 30%,
+    #6ee7b7 70%,
+    #10b981 80%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: textShimmer 6s ease-in-out infinite alternate;
+}
+@keyframes textShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
-/* --- Advanced Glassmorphism Navbar --- */
-.navbar {
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* 3. Holographic Card */
+.card-holographic {
+  background: rgba(255, 255, 255, 0.95); /* Higher opacity for better contrast */
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 0, 0, 0.15); /* Darker border */
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.1), /* Stronger lift shadow */
+    0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    inset 0 0 20px rgba(255, 255, 255, 0.8);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
+}
+[data-theme='dark'] .card-holographic {
+  background: rgba(10, 15, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 4px 6px -1px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-[data-theme='dark'] .navbar {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.card-holographic:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.15), 
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 2px var(--ifm-color-primary); /* Glow border */
 }
 
-/* Mobile responsive padding */
-@media (max-width: 996px) {
-  .navbar {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
+/* 4. Perspective Grid (The "Floor" Effect) */
+.perspective-grid {
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+  transform: perspective(1000px) rotateX(60deg) translateY(-100px) scale(2);
+  transform-origin: top center;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 40%, transparent 100%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+[data-theme='dark'] .perspective-grid {
+  background-image: 
+    linear-gradient(to right, rgba(52, 211, 153, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 211, 153, 0.1) 1px, transparent 1px);
 }
 
-/* Navbar Items */
-.navbar__item {
-  font-weight: 600;
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
-  transition: all 0.2s ease;
-  margin: 0 2px;
+/* 5. Spotlight Glow (Mouse Follower - simulated via CSS radial) */
+.glow-spotlight {
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(52, 211, 153, 0.15),
+    transparent 40%
+  );
+  z-index: 0;
 }
 
-.navbar__link:hover, .navbar__link--active {
-  background: rgba(0, 0, 0, 0.04);
-  color: var(--ifm-color-primary);
-  transform: translateY(-1px);
+/* Base Bento Card Update */
+.bento-card {
+  /* Using the holographic base now */
+  @apply card-holographic rounded-3xl;
 }
 
-[data-theme='dark'] .navbar__link:hover, [data-theme='dark'] .navbar__link--active {
+/* --- VVIP+++ Expansion Visuals --- */
+
+/* 1. Data Pipeline Flow */
+@keyframes flow {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+.animate-flow {
+  animation: flow 20s linear infinite;
+}
+
+/* 2. Pulse Ring (Active Nodes) */
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+.ring-pulse::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  border-radius: 50%;
+  border: 2px solid var(--ifm-color-primary);
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* 3. Timeline Connector */
+.timeline-connector {
+  position: absolute;
+  top: 0; bottom: 0; left: 2rem;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    var(--ifm-color-primary-light) 15%, 
+    var(--ifm-color-primary-light) 85%, 
+    transparent 100%
+  );
+  opacity: 0.3;
+}
+
+/* 4. Glass Stats Card */
+.stats-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+.stats-card:hover {
   background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-5px);
 }
 
-/* --- Premium Mobile Sidebar (Responsive Menu) --- */
-.navbar-sidebar {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
+/* --- Vercel/Stripe Inspired Sidebar --- */
+.sidebar-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ifm-color-content-secondary);
+  margin: 2rem 0 0.75rem 1rem;
+  display: block;
+}
+.sidebar-divider {
+  border: 0;
+  border-top: 1px solid var(--ifm-border-color);
+  margin: 1.5rem 0.75rem;
 }
 
-[data-theme='dark'] .navbar-sidebar {
-  background-color: rgba(10, 10, 10, 0.95) !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
-}
-
-.navbar-sidebar__brand {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: none;
-  padding: 1rem;
-}
-
-[data-theme='dark'] .navbar-sidebar__brand {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Mobile Menu Items Spacing */
-.navbar-sidebar__item {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+.menu {
+  padding: 0.5rem;
 }
 
 .menu__list-item {
-    margin-bottom: 0.5rem;
+  margin-bottom: 4px;
 }
 
-/* Enhanced Link Styling */
 .menu__link {
-  border-radius: 12px;
-  padding: 0.85rem 1rem; /* Larger touch target */
-  font-size: 1.05rem;    /* Larger text */
-  font-weight: 600;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  color: var(--ifm-font-color-base);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: none;
 }
 
 .menu__link:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-  transform: translateX(4px);
+  background-color: var(--ifm-paper-background-color);
+  text-decoration: none;
 }
-
-/* Premium Active State */
-.menu__link--active {
-  background: linear-gradient(90deg, rgba(46, 133, 85, 0.08) 0%, transparent 100%);
-  color: var(--ifm-color-primary) !important;
-  border-left: 3px solid var(--ifm-color-primary);
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  padding-left: calc(1rem - 3px); /* Compensate for border */
-}
-
 [data-theme='dark'] .menu__link:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: #0f172a; /* Slate-900 */
 }
 
+/* Active Link: Pill Style */
+.menu__link--active {
+  background-color: var(--ifm-color-primary) !important;
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px -2px rgba(16, 185, 129, 0.4);
+}
 [data-theme='dark'] .menu__link--active {
-  background: linear-gradient(90deg, rgba(37, 194, 160, 0.15) 0%, transparent 100%);
+  box-shadow: 0 4px 15px -3px rgba(52, 211, 153, 0.3);
+}
+
+/* Category Headers */
+.menu__list-item-collapsible > .menu__link {
+  font-weight: 700;
+  opacity: 0.9;
+}
+/* Don't make active category headers a solid pill */
+.menu__list-item-collapsible > .menu__link--active {
+  background-color: transparent !important;
   color: var(--ifm-color-primary) !important;
+  box-shadow: none;
 }
 
-/* Hamburger Icon Styling */
-.navbar__toggle {
-    border-radius: 12px;
-    padding: 0.5rem;
-    transition: background 0.2s ease;
+/* Nested items */
+.menu__list .menu__list {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+  border-left: 1px solid var(--ifm-border-color);
+  margin-left: 1rem;
+}
+.menu__list .menu__list .menu__link {
+  font-size: 0.9rem;
 }
 
-.navbar__toggle:active {
-    background: rgba(0,0,0,0.05);
-    transform: scale(0.95);
+/* --- GitHub Docs Sidebar Style --- */
+
+/* General Menu */
+.menu {
+  padding: 0.5rem;
 }
 
-/* --- Logo Animation --- */
-.navbar__brand:hover .navbar__logo {
-  transform: scale(1.05) rotate(-3deg);
-  transition: transform 0.3s ease;
+/* All links in the sidebar */
+.menu__link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  color: var(--ifm-font-color-base);
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+  border-left: 2px solid transparent; /* Placeholder for active state */
 }
 
-/* --- Custom Animations --- */
-
-@keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
+/* Subtle hover effect */
+.menu__link:hover {
+  background-color: var(--ifm-paper-background-color);
+  text-decoration: none;
 }
-.animate-blob {
-  animation: blob 7s infinite;
+[data-theme='dark'] .menu__link:hover {
+  background-color: #0f172a; /* Slate 900 */
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-@keyframes gradient-xy {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-.animate-gradient-xy {
-    background-size: 200% 200%;
-    animation: gradient-xy 6s ease infinite;
+/* Active link style - the key to the GitHub look */
+.menu__link--active {
+  color: var(--ifm-color-primary);
+  background-color: transparent !important; /* Override theme active bg */
+  border-left-color: var(--ifm-color-primary);
+  font-weight: 600;
 }
 
-@keyframes progress-indeterminate {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-.animate-progress-indeterminate {
-    animation: progress-indeterminate 1.5s infinite linear;
-}
-
-.animation-delay-2000 { animation-delay: 2s; }
-.animation-delay-4000 { animation-delay: 4s; }
-.animation-delay-100 { animation-delay: 0.1s; }
-.animation-delay-200 { animation-delay: 0.2s; }
-.animation-delay-300 { animation-delay: 0.3s; }
-
-
-
-
-
-
-/* Ensure smooth anims */
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Top-level category labels (e.g., "Full Textbook") */
+.menu__list-item-collapsible > .menu__link {
+  font-weight: 700;
+  color: var(--ifm-font-color-base);
+  opacity: 0.9;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
 }
 
-/* Optional: indeterminate progress bar animation */
-@keyframes progress-indeterminate {
-  0% { width: 0%; transform: translateX(-100%); }
-  100% { width: 100%; transform: translateX(100%); }
+/* Remove active border from collapsed category header */
+.menu__list-item-collapsible > .menu__link--active {
+  border-left-color: transparent;
+  color: var(--ifm-color-primary);
 }
-.animate-progress-indeterminate {
-  animation: progress-indeterminate 1.8s infinite ease-in-out;
+
+/* Indentation for nested items */
+.menu__list .menu__list {
+  padding-left: 1rem;
+  border-left: 1px solid var(--ifm-border-color);
+  margin-left: 0.75rem;
+}
+
+/* Remove extra margin from Docusaurus defaults */
+.menu__list-item-collapsible {
+  margin-bottom: 0;
+}
+
+/* --- Doc Page Header for Translator Button --- */
+.theme-doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: #020617 !important; /* Always dark for VVIP look */
+  border-top: 1px solid var(--ifm-border-color);
+  color: #fff; /* Ensure text is white */
 }

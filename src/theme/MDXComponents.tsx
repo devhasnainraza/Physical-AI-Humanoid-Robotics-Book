@@ -2,7 +2,7 @@ import React from 'react';
 // Import the original mapper
 import MDXComponents from '@theme-original/MDXComponents';
 import HardwareOnly from '@site/src/components/HardwareOnly';
-import Translator from '@site/src/components/Translator';
+import Translator from '../components/Translator';
 // import ChapterActions from '@site/src/components/ChapterActions';
 
 export default {

@@ -1,142 +1,109 @@
 ---
 id: introduction
-title: 'Introduction to Physical AI'
+title: 'Manifesto: The Age of Embodied Intelligence'
 sidebar_label: 'Introduction'
-description: 'The manifesto for the Age of Embodied Intelligence.'
+description: 'We are bridging the chasm between digital thought and physical action.'
 ---
 
 # Introduction to Physical AI
 
-**"Intelligence is not just information processing; it is the capability to interact with the world."**
+<div class="alert alert--info" role="alert">
+  <strong>The Definition:</strong> Physical AI is not just about intelligence. It is about <em>agency</em>. It is the discipline of creating machines that can perceive the chaotic world, reason about it, and physically manipulate it to achieve a goal.
+</div>
 
-Welcome to **Cortex-H1**, the definitive textbook on Physical Artificial Intelligence and Humanoid Robotics.
+We are living through a **Phase Transition** in the history of technology.
 
-We are living through a phase transition in the history of technology.
-*   **2010-2020**: The Decade of **Perception**. Deep Learning solved Vision (ImageNet) and Hearing (ASR). Computers learned to *see*.
-*   **2020-2024**: The Decade of **Generation**. Large Language Models (LLMs) solved Reasoning and Creativity. Computers learned to *think*.
-*   **2025+**: The Decade of **Embodiment**. Physical AI integrates Perception and Reasoning into physical bodies that act upon the world. Computers will learn to *move*.
+If you look back at the last 15 years, you can see the trajectory clearly:
 
-This book is your guide to that future. It bridges the chasm between "Code" and "Reality"—the gap between a Chatbot that can write a poem about walking and a Robot that can actually walk across a cluttered room without falling.
+1.  **2010–2020: The Decade of Perception** 👁️  
+    Deep Learning conquered our senses. Convolutional Neural Networks (CNNs) solved vision; Transformers solved hearing. Computers learned to *see* and *hear*.
 
----
+2.  **2020–2024: The Decade of Cognition** 🧠  
+    Large Language Models (LLMs) conquered reasoning. We built machines that can pass the Bar Exam, write poetry, and code complex software. Computers learned to *think*.
 
-## 1. What is Physical AI?
-
-Physical AI is the discipline of creating intelligent agents that exist in the physical world. It is the convergence of two historically separate fields:
-
-1.  **Robotics**: Control Theory, Kinematics, Dynamics, Hardware Design. (The Body).
-2.  **Artificial Intelligence**: Computer Vision, Reinforcement Learning, Language Models. (The Brain).
-
-For decades, these fields were siloed. Roboticists wrote PID loops and hard-coded state machines. AI researchers trained models on static JPEGs.
-**Physical AI** merges them. It uses Neural Networks to solve Inverse Kinematics. It uses Reinforcement Learning to solve Bipedal Locomotion. It uses VLM (Vision-Language Models) to solve Planning.
-
-### 1.1 The Reality Gap
-
-The defining challenge of Physical AI is the **Reality Gap**.
-In software, `if (x) then (y)` is always true.
-In robotics, `if (apply_torque) then (move_arm)` is a probability, not a certainty.
-*   The battery might be low (Voltage sag).
-*   The gears might have backlash.
-*   The floor might be slippery.
-*   A human might walk in front of you.
-
-Physical AI is not just about writing code; it is about writing code that survives contact with the chaotic, noisy, unforgiving real world.
+3.  **2025–2030: The Decade of Embodiment** 🦾  
+    This is where we are now. We are taking that "Digital Brain" and giving it a "Mechanical Body". We are moving from chatbots that *talk* about the world to robots that *change* the world. Computers will learn to *act*.
 
 ---
 
-## 2. The Robotics Stack
+## The "Reality Gap"
 
-To build a humanoid, you must master the full stack, from atoms to algorithms. This book covers every layer.
+This book is your guide to crossing the **Reality Gap**.
 
-| Layer | Component | Discipline | Technologies |
+In the world of pure software, logic is absolute. `if (x > 0)` is a promise.  
+In the world of robotics, logic is a hope. `if (apply_torque)` is a gamble.
+
+When you write code for a robot, you are fighting against physics itself:
+*   **Noise:** Sensors lie. LiDAR beams reflect off mirrors. IMUs drift.
+*   **Uncertainty:** Wheels slip on polished floors. Gears have backlash. Motors sag under load.
+*   **Chaos:** The world changes. People walk in front of you. Doors close unexpectedly.
+
+**Physical AI** is the art of building robust intelligence that can survive contact with this unforgiving reality.
+
+---
+
+## The Full Stack: From Atoms to Algorithms
+
+To build a humanoid robot, you cannot just be a "Software Engineer" or a "Mechanical Engineer". You must become a **Roboticist**—a master of the full stack.
+
+We will build this stack together, layer by layer:
+
+| Layer | Component | Discipline | Technologies We Master |
 | :--- | :--- | :--- | :--- |
-| **L7: Cognition** | Reasoning, Language, Ethics | AI / NLP | LLMs, VLA, RAG |
-| **L6: Behavior** | Tasks, Decision Making | AI / Logic | Behavior Trees, State Machines |
-| **L5: Navigation** | Path Planning, SLAM | CS / Graph Theory | A*, RRT, GraphSLAM |
-| **L4: Perception** | Object Detection, Depth | Computer Vision | CNNs, Point Clouds, Occupancy Grids |
-| **L3: Control** | Stability, Tracking | Control Theory | MPC, WBC, Impedance Control |
-| **L2: Middleware** | Communication | Software Eng | **ROS 2**, DDS |
-| **L1: Hardware** | Actuators, Sensors | Mech / Elec Eng | BLDC Motors, FOC, LiDAR, IMU |
+| **L7: Cognition** | Reasoning & Ethics | **AI / NLP** | *GPT-4o, Gemini, RAG* |
+| **L6: Behavior** | Task Planning | **Logic** | *Behavior Trees, Finite State Machines* |
+| **L5: Navigation** | Mapping & Pathing | **CS Algorithms** | *A*, RRT, GraphSLAM, Nav2* |
+| **L4: Perception** | Seeing the World | **Computer Vision** | *YOLO, Point Clouds, Occupancy Grids* |
+| **L3: Control** | Stability & Balance | **Control Theory** | *PID, MPC, Whole-Body Control* |
+| **L2: Middleware** | Communication | **Systems Eng** | ***ROS 2 (Humble/Jazzy)**, DDS* |
+| **L1: Hardware** | The Body | **Mechatronics** | *BLDC Motors, Harmonic Drives, IMUs* |
 
-**We will build this stack from the bottom up.** You cannot program L7 (Cognition) if L3 (Control) is broken and the robot falls over.
+<div class="alert alert--warning" role="alert">
+  <strong>Why Bottom-Up?</strong> You cannot write a poem (L7) if you cannot stand up (L3). We start with the math and mechanics to ensure your robot has a stable body before we give it a brain.
+</div>
 
 ---
 
-## 3. Pedagogy: "Code-First, Physics-True"
+## Our Philosophy: "Code-First, Physics-True"
 
-This is not a theoretical physics book. It is an **Engineering** book.
+This is not a theoretical physics textbook. It is an **Engineering Field Manual**.
+
 *   **We don't just derive equations**; we implement them in Python and C++.
-*   **We don't just discuss architectures**; we deploy them in ROS 2.
-*   **We don't just hypothesize**; we test in simulation (Isaac Lab/Gazebo) and prepare for real hardware.
+*   **We don't just discuss architectures**; we deploy them in **ROS 2** nodes.
+*   **We don't just hypothesize**; we test in hyper-realistic simulations (**Isaac Sim / Gazebo**) and prepare for deployment on real hardware (Jetson Orin / Unitree Go2).
 
-### The "Comfort" Philosophy
-Robotics is hard. It is mathematically dense and frustrating.
-To support you, this book adopts a **Student-Centric** approach:
-1.  **Intuition First**: Every concept starts with a physical analogy (e.g., "PID is a Driver", "SLAM is getting lost in a forest").
-2.  **Visual Math**: We visualize matrices and vectors, rather than just listing Greek letters.
-3.  **Debug Guides**: We include "Common Pitfalls" sections because we know exactly where you will get stuck.
+### The "Comfort" Promise
+Robotics is notoriously difficult. It combines the hardest parts of Math, Physics, and Computer Science.
+To help you survive, we adopt a **Student-Centric Pedagogy**:
 
----
-
-## 4. Detailed Curriculum
-
-### Part I: The Body (Hardware & Middleware)
-Before an AI can think, it must exist.
-*   **Chapter 1**: Mathematical Foundations (Linear Algebra, Quaternions).
-*   **Chapter 2**: Hardware (BLDC Motors, Gearboxes, Sensors).
-*   **Module 1**: ROS 2 (Nodes, Topics, TF2, URDF).
-
-### Part II: The Mechanics (Kinematics & Dynamics)
-How do we move?
-*   **Chapter 3**: Kinematics (FK/IK) and Dynamics (Lagrangian).
-*   **Chapter 4**: Control Systems (PID, Impedance, Feedforward).
-*   **Module 2**: Digital Twin (Simulation in Gazebo/Isaac).
-
-### Part III: The Senses (Perception & Planning)
-How do we understand the world?
-*   **Chapter 5**: Perception (Camera Models, CNNs).
-*   **Chapter 6**: Planning (A*, RRT, Trajectory Optimization).
-*   **Chapter 8**: SLAM (Mapping and Localization).
-
-### Part IV: The Brain (Learning & Humanoids)
-The cutting edge.
-*   **Chapter 7**: RL Theory (MDPs, Bellman).
-*   **Chapter 9**: Humanoids (ZMP, Walking Stability).
-*   **Module 3**: Reinforcement Learning (PPO, Sim-to-Real).
-*   **Module 4**: VLA (Vision-Language-Action Models).
+1.  **Intuition First**: Every complex concept (like a Kalman Filter) starts with a simple analogy ("It's like merging two opinions based on trust").
+2.  **Visual Math**: We visualize vectors and matrices. We don't just list Greek letters; we show you what they *do* to space.
+3.  **Debug Guides**: We know where you will get stuck. We include "Common Pitfalls" sections derived from hundreds of hours of debugging real robots.
 
 ---
 
-## 5. Prerequisites
+## Prerequisites: What You Need
 
-To succeed in this course, you should be comfortable with:
+You are about to embark on the most difficult and rewarding engineering challenge of the 21st century. To succeed, you should be comfortable with:
 
 ### 1. Programming (The Tool)
-*   **Python**: Intermediate. Classes, decorators, numpy.
-*   **C++**: Basic. Pointers, references, classes (for high-performance Nodes).
-*   **Linux**: The native environment of robotics. You should know `bash`, `ssh`, and `git`.
+*   **Python**: Intermediate (Classes, decorators, `numpy`).
+*   **C++**: Basic (Pointers, references, classes).
+*   **Linux**: You must know your way around a terminal (`bash`, `ssh`, `git`).
 
 ### 2. Mathematics (The Language)
-*   **Linear Algebra**:
-    *   *Vectors*: Direction vs Point. Norms.
-    *   *Matrices*: Rotations, Transforms, Inverses, Eigenvalues.
-*   **Calculus**:
-    *   *Derivatives*: Gradients (for Optimization and Deep Learning).
-    *   *Integrals*: Physics ($F=ma 	o v 	o x$).
-*   **Probability**:
-    *   *Bayes Rule*: Updating belief.
-    *   *Gaussians*: Modeling noise.
+*   **Linear Algebra**: Dot products, Cross products, Transformation Matrices.
+*   **Calculus**: Gradients (for Optimization) and Integrals (for Physics).
+*   **Probability**: Bayes Rule and Gaussian distributions.
 
 ### 3. Physics (The Rules)
-*   **Newton's Laws**: $F=ma$, $	au = I 
-The new string does not contain any characters that require escaping for markdown or code contexts. The existing double quotes and single quotes are correctly used. Therefore, no changes are needed.a$.
-*   **Energy**: Kinetic vs Potential.
+*   **Newton's Laws**: $F=ma$, Torque, Angular Momentum.
 
 ---
 
-## 6. Your Journey Starts Here
+## Your Journey Starts Here
 
-You are about to embark on the most difficult and rewarding engineering challenge of the 21st century.
-You are not just writing code. You are breathing life into metal.
+You are not just writing code. You are breathing life into metal.  
+You are building the **Body** for the **Digital Brain**.
 
-Let us begin.
+Let's begin.
